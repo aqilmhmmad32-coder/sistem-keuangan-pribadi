@@ -1,0 +1,190 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 220 14% 10%;
+    --card: 0 0% 100%;
+    --card-foreground: 220 14% 10%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 14% 10%;
+    --primary: 160 84% 39%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 220 14% 96%;
+    --secondary-foreground: 220 14% 10%;
+    --muted: 220 14% 96%;
+    --muted-foreground: 220 8% 46%;
+    --accent: 220 14% 96%;
+    --accent-foreground: 220 14% 10%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+    --income: 160 84% 39%;
+    --income-foreground: 0 0% 100%;
+    --expense: 0 72% 51%;
+    --expense-foreground: 0 0% 100%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 160 84% 39%;
+    --radius: 0.75rem;
+    --chart-1: 160 84% 39%;
+    --chart-2: 0 72% 51%;
+    --chart-3: 220 70% 50%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+    --sidebar-bg: 0 0% 100%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-foreground: 220 14% 10%;
+    --sidebar-muted: 220 8% 46%;
+  }
+
+  .dark {
+    --background: 220 20% 5%;
+    --foreground: 220 14% 93%;
+    --card: 220 18% 8%;
+    --card-foreground: 220 14% 93%;
+    --popover: 220 18% 8%;
+    --popover-foreground: 220 14% 93%;
+    --primary: 160 84% 45%;
+    --primary-foreground: 220 20% 5%;
+    --secondary: 220 14% 12%;
+    --secondary-foreground: 220 14% 93%;
+    --muted: 220 14% 12%;
+    --muted-foreground: 220 8% 56%;
+    --accent: 220 14% 12%;
+    --accent-foreground: 220 14% 93%;
+    --destructive: 0 62% 50%;
+    --destructive-foreground: 220 14% 93%;
+    --income: 160 84% 45%;
+    --income-foreground: 220 20% 5%;
+    --expense: 0 62% 50%;
+    --expense-foreground: 220 14% 93%;
+    --border: 220 13% 16%;
+    --input: 220 13% 16%;
+    --ring: 160 84% 45%;
+    --chart-1: 160 84% 45%;
+    --chart-2: 0 62% 50%;
+    --chart-3: 220 70% 55%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+    --sidebar-bg: 220 20% 7%;
+    --sidebar-border: 220 13% 16%;
+    --sidebar-foreground: 220 14% 93%;
+    --sidebar-muted: 220 8% 56%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+}
+
+@layer utilities {
+  .income-color {
+    color: hsl(var(--income));
+  }
+  .expense-color {
+    color: hsl(var(--expense));
+  }
+  .income-bg {
+    background-color: hsl(var(--income));
+    color: hsl(var(--income-foreground));
+  }
+  .expense-bg {
+    background-color: hsl(var(--expense));
+    color: hsl(var(--expense-foreground));
+  }
+}
+
+/* Premium Animations */
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slide-in-left {
+  from { opacity: 0; transform: translateX(-12px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes scale-in {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.4s ease-out both;
+}
+
+.animate-slide-in-left {
+  animation: slide-in-left 0.3s ease-out both;
+}
+
+.animate-scale-in {
+  animation: scale-in 0.3s ease-out both;
+}
+
+.stagger-1 { animation-delay: 0.05s; }
+.stagger-2 { animation-delay: 0.1s; }
+.stagger-3 { animation-delay: 0.15s; }
+.stagger-4 { animation-delay: 0.2s; }
+.stagger-5 { animation-delay: 0.25s; }
+.stagger-6 { animation-delay: 0.3s; }
+
+/* Card hover effect */
+.card-hover {
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+.card-hover:hover {
+  box-shadow: 0 4px 20px -4px hsl(var(--foreground) / 0.08);
+  transform: translateY(-1px);
+}
+
+/* Glassmorphism for sidebar */
+.glass-sidebar {
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+}
+
+/* Smooth page transition */
+.page-transition {
+  animation: fade-in 0.35s ease-out;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--border));
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground));
+}
+
+/* Table row hover */
+.table-row-hover {
+  transition: background-color 0.15s ease;
+}
+
+.table-row-hover:hover {
+  background-color: hsl(var(--muted) / 0.5);
+}
