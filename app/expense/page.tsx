@@ -200,8 +200,8 @@ export default function ExpensePage() {
       </Card>
 
       {/* Filters */}
-      <div className="flex flex-col sm:flex-row gap-3 animate-fade-in stagger-3">
-        <div className="relative flex-1">
+      <div className="flex flex-col xs:flex-row gap-3 animate-fade-in stagger-3">
+        <div className="relative flex-1 min-w-0">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
           <Input
             placeholder="Cari pengeluaran..."
@@ -216,7 +216,7 @@ export default function ExpensePage() {
           )}
         </div>
         <Select value={filterMonth} onValueChange={setFilterMonth}>
-          <SelectTrigger className="w-[140px] h-9 text-[13px]">
+          <SelectTrigger className="w-full xs:w-[140px] h-9 text-[13px]">
             <SelectValue placeholder="Bulan" />
           </SelectTrigger>
           <SelectContent>
@@ -227,7 +227,7 @@ export default function ExpensePage() {
           </SelectContent>
         </Select>
         <Select value={filterYear} onValueChange={setFilterYear}>
-          <SelectTrigger className="w-[110px] h-9 text-[13px]">
+          <SelectTrigger className="w-full xs:w-[110px] h-9 text-[13px]">
             <SelectValue placeholder="Tahun" />
           </SelectTrigger>
           <SelectContent>
@@ -245,34 +245,31 @@ export default function ExpensePage() {
           {expenses.length > 0 ? (
             <div className="divide-y divide-border">
               {expenses.map(t => (
-                <div key={t.id} className="flex items-center justify-between px-4 py-3.5 table-row-hover">
-                  <div className="flex items-center gap-3 min-w-0 flex-1">
-                    <div
-                      className="w-9 h-9 rounded-lg flex items-center justify-center shrink-0"
-                      style={{ backgroundColor: `${CATEGORY_COLORS[t.category] || '#ef4444'}15` }}
-                    >
-                      <TrendingDown className="h-4 w-4" style={{ color: CATEGORY_COLORS[t.category] || '#ef4444' }} />
-                    </div>
-                    <div className="min-w-0 flex-1">
-                      <div className="flex items-center gap-2">
-                        <p className="text-[13px] font-medium truncate">{t.category}</p>
-                        <span className="inline-flex items-center px-1.5 py-0.5 rounded-md text-[10px] font-medium bg-red-500/10 text-red-600 dark:text-red-400 shrink-0">
-                          {t.paymentMethod || 'Tunai'}
-                        </span>
-                      </div>
-                      <p className="text-[11px] text-muted-foreground truncate mt-0.5">{t.note || t.date}</p>
-                    </div>
+                <div key={t.id} className="flex items-center gap-3 px-4 py-3.5 table-row-hover">
+                  <div
+                    className="w-9 h-9 rounded-lg flex items-center justify-center shrink-0"
+                    style={{ backgroundColor: `${CATEGORY_COLORS[t.category] || '#ef4444'}15` }}
+                  >
+                    <TrendingDown className="h-4 w-4" style={{ color: CATEGORY_COLORS[t.category] || '#ef4444' }} />
                   </div>
-                  <div className="flex items-center gap-3 shrink-0 ml-4">
-                    <p className="text-[13px] font-semibold text-red-600 dark:text-red-400">-{FORMAT_CURRENCY(t.amount)}</p>
-                    <div className="flex items-center gap-0.5">
-                      <Button variant="ghost" size="icon" className="h-7 w-7" onClick={() => handleEdit(t)}>
-                        <Pencil className="h-3 w-3" />
-                      </Button>
-                      <Button variant="ghost" size="icon" className="h-7 w-7 text-destructive hover:text-destructive" onClick={() => handleDelete(t.id)}>
-                        <Trash2 className="h-3 w-3" />
-                      </Button>
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-center gap-2">
+                      <p className="text-[13px] font-medium truncate">{t.category}</p>
+                      <span className="inline-flex items-center px-1.5 py-0.5 rounded-md text-[10px] font-medium bg-red-500/10 text-red-600 dark:text-red-400 shrink-0">
+                        {t.paymentMethod || 'Tunai'}
+                      </span>
                     </div>
+                    <p className="text-[11px] text-muted-foreground truncate mt-0.5">{t.note || t.date}</p>
+                  </div>
+                  <p className="text-[13px] font-semibold text-red-600 dark:text-red-400 shrink-0 ml-2 hidden xs:block">-{FORMAT_CURRENCY(t.amount)}</p>
+                  <div className="flex items-center gap-0.5 shrink-0 ml-2 xs:ml-4">
+                    <p className="text-[13px] font-semibold text-red-600 dark:text-red-400 xs:hidden">-{FORMAT_CURRENCY(t.amount)}</p>
+                    <Button variant="ghost" size="icon" className="h-7 w-7" onClick={() => handleEdit(t)}>
+                      <Pencil className="h-3 w-3" />
+                    </Button>
+                    <Button variant="ghost" size="icon" className="h-7 w-7 text-destructive hover:text-destructive" onClick={() => handleDelete(t.id)}>
+                      <Trash2 className="h-3 w-3" />
+                    </Button>
                   </div>
                 </div>
               ))}

@@ -123,7 +123,7 @@ export default function ReportsPage() {
   return (
     <div className="space-y-8">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 animate-fade-in">
+      <div className="flex flex-col xs:flex-row xs:items-center xs:justify-between gap-4 animate-fade-in">
         <div>
           <h1 className="text-2xl font-bold tracking-tight">Laporan</h1>
           <p className="text-sm text-muted-foreground mt-1">Export dan ringkasan data keuangan</p>
@@ -153,7 +153,7 @@ export default function ReportsPage() {
       </div>
 
       {/* Summary Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
         <Card className="border-l-4 border-l-emerald-500 card-hover animate-fade-in stagger-1">
           <CardContent className="pt-5 pb-4">
             <div className="flex items-center justify-between mb-2">
@@ -192,11 +192,11 @@ export default function ReportsPage() {
         </CardHeader>
         <CardContent>
           {dailyData.length > 0 ? (
-            <ResponsiveContainer width="100%" height={280}>
+            <ResponsiveContainer width="100%" height={260} className="sm:h-[280px]">
               <BarChart data={dailyData}>
                 <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="hsl(var(--border))" />
                 <XAxis dataKey="date" tick={{ fontSize: 10 }} stroke="hsl(var(--muted-foreground))" tickFormatter={v => v.substring(8)} axisLine={false} tickLine={false} />
-                <YAxis tick={{ fontSize: 11 }} stroke="hsl(var(--muted-foreground))" tickFormatter={v => `${(v / 1000000).toFixed(1)}jt`} axisLine={false} tickLine={false} width={50} />
+                <YAxis tick={{ fontSize: 10 }} stroke="hsl(var(--muted-foreground))" tickFormatter={v => `${(v / 1000000).toFixed(1)}jt`} axisLine={false} tickLine={false} width={42} />
                 <Tooltip
                   formatter={(value: number) => FORMAT_CURRENCY(value)}
                   contentStyle={{
@@ -213,7 +213,7 @@ export default function ReportsPage() {
               </BarChart>
             </ResponsiveContainer>
           ) : (
-            <div className="flex items-center justify-center h-[280px] text-sm text-muted-foreground">
+            <div className="flex items-center justify-center h-[240px] sm:h-[280px] text-sm text-muted-foreground">
               Belum ada transaksi untuk periode ini
             </div>
           )}
@@ -229,24 +229,22 @@ export default function ReportsPage() {
           {filteredTransactions.length > 0 ? (
             <div className="divide-y divide-border">
               {filteredTransactions.map(t => (
-                <div key={t.id} className="flex items-center justify-between px-4 py-3 table-row-hover">
-                  <div className="flex items-center gap-3 min-w-0 flex-1">
-                    <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 ${
-                      t.type === 'income' ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400' : 'bg-red-500/10 text-red-600 dark:text-red-400'
-                    }`}>
-                      {t.type === 'income' ? <TrendingUp className="h-3.5 w-3.5" /> : <TrendingDown className="h-3.5 w-3.5" />}
-                    </div>
-                    <div className="min-w-0 flex-1">
-                      <div className="flex items-center gap-2">
-                        <p className="text-[13px] font-medium truncate">{t.category}</p>
-                        <Badge variant={t.type === 'income' ? 'secondary' : 'destructive'} className="text-[10px] px-1.5 py-0">
-                          {t.type === 'income' ? 'Masuk' : 'Keluar'}
-                        </Badge>
-                      </div>
-                      <p className="text-[11px] text-muted-foreground">{t.date}</p>
-                    </div>
+                <div key={t.id} className="flex items-center gap-3 px-4 py-3 table-row-hover">
+                  <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 ${
+                    t.type === 'income' ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400' : 'bg-red-500/10 text-red-600 dark:text-red-400'
+                  }`}>
+                    {t.type === 'income' ? <TrendingUp className="h-3.5 w-3.5" /> : <TrendingDown className="h-3.5 w-3.5" />}
                   </div>
-                  <p className={`text-[13px] font-semibold shrink-0 ml-4 ${t.type === 'income' ? 'text-emerald-600 dark:text-emerald-400' : 'text-red-600 dark:text-red-400'}`}>
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-center gap-2">
+                      <p className="text-[13px] font-medium truncate">{t.category}</p>
+                      <Badge variant={t.type === 'income' ? 'secondary' : 'destructive'} className="text-[10px] px-1.5 py-0">
+                        {t.type === 'income' ? 'Masuk' : 'Keluar'}
+                      </Badge>
+                    </div>
+                    <p className="text-[11px] text-muted-foreground">{t.date}</p>
+                  </div>
+                  <p className={`text-[13px] font-semibold shrink-0 ml-2 ${t.type === 'income' ? 'text-emerald-600 dark:text-emerald-400' : 'text-red-600 dark:text-red-400'}`}>
                     {t.type === 'income' ? '+' : '-'}{FORMAT_CURRENCY(t.amount)}
                   </p>
                 </div>
@@ -262,7 +260,7 @@ export default function ReportsPage() {
       </Card>
 
       {/* Export Buttons */}
-      <div className="flex flex-col sm:flex-row gap-3 animate-fade-in stagger-6">
+      <div className="flex flex-col xs:flex-row gap-3 animate-fade-in stagger-6">
         <Button onClick={handleExportCSV} variant="outline" className="gap-2 h-9 text-[13px]">
           <FileSpreadsheet className="h-4 w-4" />
           Export ke CSV / Excel

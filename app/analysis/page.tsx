@@ -153,7 +153,7 @@ export default function AnalysisPage() {
       </div>
 
       {/* Key Metrics */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
         <Card className="card-hover animate-fade-in stagger-1">
           <CardContent className="pt-5 pb-4">
             <div className="flex items-center justify-between mb-3">
@@ -210,7 +210,7 @@ export default function AnalysisPage() {
           <CardTitle className="text-sm">Tren Bulanan {selectedYear}</CardTitle>
         </CardHeader>
         <CardContent>
-          <ResponsiveContainer width="100%" height={300}>
+          <ResponsiveContainer width="100%" height={260} className="sm:h-[300px]">
             <LineChart data={monthlyTrend}>
               <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="hsl(var(--border))" />
               <XAxis dataKey="name" tick={{ fontSize: 11 }} stroke="hsl(var(--muted-foreground))" axisLine={false} tickLine={false} />
@@ -233,14 +233,14 @@ export default function AnalysisPage() {
       </Card>
 
       {/* Category Breakdown */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
         <Card className="card-hover animate-fade-in stagger-5">
           <CardHeader className="pb-2">
             <CardTitle className="text-sm">Pengeluaran per Kategori</CardTitle>
           </CardHeader>
           <CardContent>
             {categoryData.length > 0 ? (
-              <ResponsiveContainer width="100%" height={280}>
+              <ResponsiveContainer width="100%" height={240} className="sm:h-[280px]">
                 <PieChart>
                   <Pie
                     data={categoryData}
@@ -261,7 +261,7 @@ export default function AnalysisPage() {
                 </PieChart>
               </ResponsiveContainer>
             ) : (
-              <div className="flex items-center justify-center h-[280px] text-sm text-muted-foreground">
+              <div className="flex items-center justify-center h-[240px] sm:h-[280px] text-sm text-muted-foreground">
                 Belum ada data
               </div>
             )}

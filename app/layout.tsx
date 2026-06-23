@@ -28,8 +28,8 @@ export default function RootLayout({
         >
           <div className="min-h-screen flex">
             <Sidebar />
-            <main className="flex-1 md:ml-[260px]">
-              <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 pt-16 md:pt-8">
+            <main className="flex-1 md:ml-[260px] min-w-0">
+              <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 pt-16 md:pt-8">
                 <div className="page-transition">
                   {children}
                 </div>

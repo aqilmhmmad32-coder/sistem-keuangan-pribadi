@@ -144,7 +144,7 @@ export default function DashboardPage() {
       </Card>
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
         <StatCard
           title="Total Saldo"
           value={FORMAT_CURRENCY(totalBalance)}
@@ -180,15 +180,15 @@ export default function DashboardPage() {
       </div>
 
       {/* Charts */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
         <Card className="lg:col-span-2 card-hover animate-fade-in stagger-5">
           <CardContent className="pt-6">
             <h3 className="text-sm font-semibold mb-4">Pemasukan vs Pengeluaran</h3>
-            <ResponsiveContainer width="100%" height={280}>
+            <ResponsiveContainer width="100%" height={260} className="sm:h-[280px]">
               <BarChart data={monthlyChartData} barGap={4}>
                 <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="hsl(var(--border))" />
                 <XAxis dataKey="name" tick={{ fontSize: 11 }} stroke="hsl(var(--muted-foreground))" axisLine={false} tickLine={false} />
-                <YAxis tick={{ fontSize: 11 }} stroke="hsl(var(--muted-foreground))" tickFormatter={v => `${(v / 1000000).toFixed(1)}jt`} axisLine={false} tickLine={false} width={50} />
+                <YAxis tick={{ fontSize: 10 }} stroke="hsl(var(--muted-foreground))" tickFormatter={v => `${(v / 1000000).toFixed(1)}jt`} axisLine={false} tickLine={false} width={42} />
                 <Tooltip
                   formatter={(value: number) => FORMAT_CURRENCY(value)}
                   contentStyle={{
@@ -211,7 +211,7 @@ export default function DashboardPage() {
           <CardContent className="pt-6">
             <h3 className="text-sm font-semibold mb-4">Kategori Pengeluaran</h3>
             {expensePieData.length > 0 ? (
-              <ResponsiveContainer width="100%" height={280}>
+              <ResponsiveContainer width="100%" height={260} className="sm:h-[280px]">
                 <PieChart>
                   <Pie
                     data={expensePieData}
